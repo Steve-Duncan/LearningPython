@@ -5,6 +5,7 @@ class Bike(object):
 		self.max_speed = max_speed
 		self.miles = 10
 		self.name = self
+		
 
 
 	def displayInfo(self):
@@ -12,15 +13,20 @@ class Bike(object):
 		print "maximum speed: " + str(self.max_speed) + "mph"
 
 		print "total miles ridden:", self.miles
+		return self
 
-	def ride(self):
-		print "Riding"
+	def ride(self,num):
+		self.num = num
+		print "Riding",num,"times"
 		#print "Total miles ridden: " + str(self.miles+10)
-		self.miles += 10
+		self.miles += 10 * num
+		return self
 
-	def reverse(self):
-		print "Reversing"
-		self.miles -=5
+	def reverse(self,num):
+		self.num = num
+		print "Reversing",num,"times"
+		self.miles -=5 * num
+		return self
 
 
 
@@ -31,31 +37,19 @@ bike3 = Bike(175,25)
 
 
 print "\nbike1:"
-#call ride function 3 times
-for i in range(3): bike1.ride()
-#call reverse function 3 times
-for i in range(3): bike1.reverse()
-print "\nbike1 info:"
-#call function to display info
-bike1.displayInfo()
+#call ride function 3 times, reverse function 3 times and display info
+bike1.ride(3).reverse(4).displayInfo()
 
-print "bike2:"
-#call ride function 2 times
-for i in range(2): bike2.ride()
-#call reverse function 2 times
-for i in range(2): bike2.reverse()
-print "\nbike2 info:"
-#call function to display info
-bike2.displayInfo()
+print "\nbike2:"
+# #call ride function 2 times, reverse function 2 times and display info
+bike2.ride(2).reverse(2).displayInfo()
 
 print "\nbike3:"
-#call reverse function 3 times
-for i in range(3): bike3.reverse()
-print "\nbike3 info:"
-#call function to display info
-bike3.displayInfo()
-#to prevent having negativbe miles,I would change the reverse method to not subtract miles;
-#since miles ridden in opposition are still miles ridden. So the calculation would be for 
-#the absolute value of miles ridden
+# #call reverse function 3 times and display info
+bike3.reverse(3).displayInfo()
+
+# #to prevent having negative miles,I would change the reverse method to not subtract miles;
+# #since miles ridden in opposition are still miles ridden. So the calculation would be for 
+# #the absolute value of miles ridden
 
 
