@@ -4,18 +4,29 @@ class MathDojo(object):
 
 	def add(self,arg1,*rest):
 		# *rest is a tuple of all arguments passed after the first arg
-		# set result equal to the first argument + the sum of remaining args
-	
-		self.result += (arg1 + sum(rest))
+		
+		tmpList = list(rest)								#convert args in tuple to list
+		tmpList.insert(0,arg1)								#add arg(s) not in tuple to list
+		for t in range (0,len(tmpList)):					#iterate elements in list
+			if type(tmpList[t]) is list:					#if element is list:
+				self.result += (sum(tuple(tmpList[t])))		#convert list to tuple and sum elements of tuple				
+			else:											#if singleton:
+				self.result += tmpList[t]					#add element to total
 		return self
 
 	def subtract(self,arg1,*rest):
-		# set result equal to the first argument - the sum of remaining args
-		self.result -= (arg1 + sum(rest))
+		tmpList = list(rest)								#convert args in tuple to list
+		tmpList.insert(0,arg1)								#add arg(s) not in tuple to list
+		for t in range (0,len(tmpList)):					#iterate elements in list
+			if type(tmpList[t]) is list:					#if element is list:
+				self.result -= (sum(tuple(tmpList[t])))		#convert list to tuple and subtract sum of elements in tuple				
+			else:											#if singleton:
+				self.result -= tmpList[t]					#subtract element from total
 		return self
 
-md=MathDojo()
-print md.add(2).add(2, 5).subtract(3, 2).result
+md=MathDojo()												#instantiate MathDojo class
+print md.add([1],3,4).add([3, 5, 7, 8], [2, 4.3, 1.25]).subtract(2, [2,3], [1.1, 2.3]).result
+
 
 
 
